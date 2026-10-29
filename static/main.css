@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #101F40;
+    --card: #172B50;
+    --bubble: #263D62;
+    --yellow: #FFCA05;
+    --white: #FFFFFF;
+    --muted: #9CB2D5;
+    --cyan: #63DDF5;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--blue);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+    min-height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            #2563EB20,
+            transparent 35%
+        ),
+        var(--blue);
+}
+
+/* TOP HEADER */
+
+.topbar {
+    padding: 20px 28px;
+    background: #172B50;
+    border-bottom: 1px solid #FFFFFF12;
+    box-shadow: 0 4px 20px #0002;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFEAF7;
+    border-radius: 16px;
+    font-size: 30px;
+}
+
+.brand h1 {
+    font-size: 25px;
+    letter-spacing: -0.8px;
+}
+
+.brand h1 span {
+    color: var(--yellow);
+}
+
+.brand p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* CHAT AREA */
+
+.chat {
+    flex: 1;
+    min-height: 300px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* MESSAGE BUBBLES */
+
+.message {
+    width: fit-content;
+    max-width: min(75%, 520px);
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.message.user {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.message.bot {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+/* SENDER NAME */
+
+.sender {
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+
+.user .sender {
+    color: var(--yellow);
+}
+
+.bot .sender {
+    color: var(--cyan);
+}
+
+/* MESSAGE TEXT */
+
+.message-text {
+    padding: 13px 17px;
+    border-radius: 17px;
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    box-shadow: 0 4px 12px #0002;
+}
+
+.user .message-text {
+    background: var(--yellow);
+    color: #17213A;
+    border-bottom-right-radius: 5px;
+}
+
+.bot .message-text {
+    background: var(--bubble);
+    color: var(--white);
+    border: 1px solid #FFFFFF0D;
+    border-bottom-left-radius: 5px;
+}
+
+/* MESSAGE INPUT */
+
+.bottom {
+    padding: 16px 28px 20px;
+    background: #172B50;
+    border-top: 1px solid #FFFFFF12;
+}
+
+.input-box {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.input-box form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 9px 8px 20px;
+    background: var(--blue);
+    border: 1px solid #344969;
+    border-radius: 18px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-box form:focus-within {
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px #63DDF510;
+}
+
+.input-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-size: 15px;
+}
+
+.input-box input::placeholder {
+    color: #8298BA;
+}
+
+.input-box button {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 13px;
+    background: var(--yellow);
+    color: var(--blue);
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.input-box button:hover {
+    background: #FFDA45;
+    transform: translateY(-2px);
+}
+
+.input-box button:active {
+    transform: translateY(1px);
+}
+
+/* FOOTER */
+
+.footer {
+    padding: 13px;
+    color: #8298BA;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* SMALL SCREENS */
+
+@media (max-width: 600px) {
+    .topbar {
+        padding: 16px;
+    }
+
+    .chat {
+        padding: 22px 15px;
+    }
+
+    .message {
+        max-width: 88%;
+    }
+
+    .bottom {
+        padding: 12px 12px 16px;
+    }
+
+    .brand h1 {
+        font-size: 23px;
+    }
+}

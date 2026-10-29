@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popcorn Chat</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+
+<body>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="logo">🍿</div>
+                <div>
+                    <h1>Popcorn<span>.</span></h1>
+                    <p>Your people. Your conversations.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="chat">
+
+            <div class="messages" id="messages">
+
+                {% for i in lenght %}
+
+                    {% if chats[i][0] == name %}
+
+                        <div class="message user">
+                            <div class="sender">{{ chats[i][0] }}</div>
+                            <div class="message-text">{{ chats[i][1] }}</div>
+                        </div>
+
+                    {% else %}
+
+                        <div class="message bot">
+                            <div class="sender">{{ chats[i][0] }}</div>
+                            <div class="message-text">{{ chats[i][1] }}</div>
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+        <div class="bottom">
+
+            <div class="input-box">
+                <form action="/home" method="POST">
+                    <input
+                        type="text"
+                        name="message"
+                        placeholder="Type a message..."
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit" aria-label="Send message">➤</button>
+                </form>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            Made by Purav Aher
+        </footer>
+
+    </main>
+<script>
+    async function updateMessages() {
+        const response = await fetch("/get_messages");
+        const data = await response.json();
+
+        const messagesDiv = document.getElementById("messages");
+        messagesDiv.innerHTML = "";
+
+        data.chats.forEach(chat => {
+            const sender = chat[0];
+            const message = chat[1];
+
+            const bubble = document.createElement("div");
+            bubble.className = sender === {{ name | tojson }}
+                ? "message user"
+                : "message bot";
+
+            const senderDiv = document.createElement("div");
+            senderDiv.className = "sender";
+            senderDiv.textContent = sender;
+
+            const textDiv = document.createElement("div");
+            textDiv.className = "message-text";
+            textDiv.textContent = message;
+
+            bubble.appendChild(senderDiv);
+            bubble.appendChild(textDiv);
+            messagesDiv.appendChild(bubble);
+        });
+    }
+
+    updateMessages();
+    setInterval(updateMessages, 2000);
+</script>
+</body>
+</html>
